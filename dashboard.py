@@ -4,15 +4,22 @@ import matplotlib.pyplot as plt
 
 df = pd.read_csv("nofluffjobs_offers.csv")
 
+# Zamiana przecinków i białych znaków, konwersja do float
+df['Wynagrodzenie od (PLN)'] = df['Wynagrodzenie od (PLN)'].astype(str).str.replace(" ", "").str.replace(",", "").astype(float)
+df['Wynagrodzenie do (PLN)'] = df['Wynagrodzenie do (PLN)'].astype(str).str.replace(" ", "").str.replace(",", "").astype(float)
+
+# Wypełnienie pustych wartości w kolumnie 'Wynagrodzenie do (PLN)'
 df['Wynagrodzenie do (PLN)'].fillna(df['Wynagrodzenie od (PLN)'], inplace=True)
+
+# Obliczenie średniego wynagrodzenia
 df['Średnie wynagrodzenie (PLN)'] = (df['Wynagrodzenie od (PLN)'] + df['Wynagrodzenie do (PLN)']) / 2
 
-st.title("📊 Analiza ofert pracy dla Java Developerów")
+st.title("Analiza ofert pracy dla Java Developerów")
 
-st.subheader("📌 Tabela z danymi o ofertach pracy")
+st.subheader("Tabela z danymi o ofertach pracy")
 st.dataframe(df)
 
-st.subheader("📍 Średnie wynagrodzenie według lokalizacji")
+st.subheader("Średnie wynagrodzenie według lokalizacji")
 avg_salary_by_location = df.groupby('Lokalizacja')['Średnie wynagrodzenie (PLN)'].mean().sort_values(ascending=False)
 
 fig, ax = plt.subplots(figsize=(12, 8))
@@ -23,5 +30,5 @@ ax.set_ylabel('Średnie wynagrodzenie (PLN)')
 ax.grid(True)
 st.pyplot(fig)
 
-st.subheader("📍 Ilość ofert per lokalizacja")
+st.subheader("Ilość ofert per lokalizacja")
 st.write(df['Lokalizacja'].value_counts())
