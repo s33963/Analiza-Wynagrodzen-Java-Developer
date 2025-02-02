@@ -23,7 +23,10 @@ Projekt polega na pobieraniu ofert pracy dla programistów Java z serwisu NoFluf
    python analysis.py
    
 5. **Uruchom dashboard Streamlit**:
-   
+   ***poprzez link do aplikacji skonfigurowanej w wirtualnym środowisku:
+   https://laughing-waffle-wr5j7794jgqgf5px5-8501.app.github.dev
+
+   ***poprzez uruchomienie pliku z poziomu wiersza polecenia, poprzedzając "run" odpowiednią ścieżką pliku
    streamlit run dashboard.py
    
 
